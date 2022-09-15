@@ -1,0 +1,24 @@
+#Author: sakthi.email@your.domain.com
+
+
+Feature: Mobile validation
+  
+
+  Scenario: Mobile Validation
+    Given User launches flipkart application
+		And User handles login
+		When User search mobile
+		And User select the mobile and click add to cart
+		And User doing the payment
+		Then User receive the confirmation message
+
+  
+  #Scenario Outline: Title of your scenario outline
+    #Given I want to write a step with <name>
+    #When I check for the <value> in step
+    #Then I verify the <status> in step
+#
+    #Examples: 
+      #| name  | value | status  |
+      #| name1 |     5 | success |
+      #| name2 |     7 | Fail    |

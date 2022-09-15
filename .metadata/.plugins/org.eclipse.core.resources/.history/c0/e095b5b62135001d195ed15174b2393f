@@ -1,0 +1,19 @@
+#Author: sakthi.email@your.domain.com
+Feature: Mobile validation
+
+  Scenario: Mobile Validation
+    Given User launches flipkart application
+    And User handles login
+    When User search mobile "realme"
+    And User select the mobile and click add to cart
+    And User doing the payment
+    Then User receive the confirmation message
+    
+  Scenario: Mobile Validation
+    Given User launches flipkart application
+    And User handles login
+    When User search mobile by using 1D list
+    |realme||iphone||Samsung|
+    And User select the mobile and click add to cart
+    And User doing the payment
+    Then User receive the confirmation message

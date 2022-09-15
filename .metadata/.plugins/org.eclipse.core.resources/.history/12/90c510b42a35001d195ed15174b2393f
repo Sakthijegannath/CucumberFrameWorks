@@ -1,0 +1,40 @@
+#Author: sakthi.email@your.domain.com
+Feature: Mobile validation
+
+  Background: 
+    Given User launches flipkart application
+    And User handles login
+
+  Scenario: Mobile Validation
+    When User search mobile
+    And User select the mobile and click add to cart
+    And User doing the payment
+    Then User receive the confirmation message
+
+  Scenario: Mobile Validation by using list
+    When User search mobile by using OneD list
+      | realme C33 (Aqua Blue, 32 GB) |  | APPLE iPhone 11 (White, 64 GB) |  | REDMI 9i Sport (Carbon Black, 64 GB) |
+    And User select the mobile and click add to cart
+    And User doing the payment
+    Then User receive the confirmation message
+
+  Scenario: Mobile Validation by using map
+    When User search mobile by using OneD map
+      | A | realme C33 (Aqua Blue, 32 GB)        |
+      | B | APPLE iPhone 11 (White, 64 GB)       |
+      | C | REDMI 9i Sport (Carbon Black, 64 GB) |
+    And User select the mobile and click add to cart
+    And User doing the payment
+    Then User receive the confirmation message
+
+  Scenario Outline: 
+    When User search mobile "<Phone>"
+    And User select the mobile and click add to cart
+    And User doing the payment
+    Then User receive the confirmation message
+
+    Examples: 
+      | Phone                                |
+      | realme C33 (Aqua Blue, 32 GB)        |
+      | APPLE iPhone 11 (White, 64 GB)       |
+      | REDMI 9i Sport (Carbon Black, 64 GB) |

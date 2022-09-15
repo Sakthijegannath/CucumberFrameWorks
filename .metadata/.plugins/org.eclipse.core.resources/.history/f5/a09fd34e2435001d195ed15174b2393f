@@ -1,0 +1,30 @@
+#Author: sakthi.email@your.domain.com
+Feature: Mobile validation
+
+  Scenario: Mobile Validation
+    Given User launches flipkart application
+    And User handles login
+    When User search mobile "realme"
+    And User select the mobile and click add to cart
+    And User doing the payment
+    Then User receive the confirmation message
+
+  Scenario: Mobile Validation by using list
+    Given User launches flipkart application
+    And User handles login
+    When User search mobile by using OneD list
+      | samsung |  | redmi |  | realme |
+    And User select the mobile and click add to cart
+    And User doing the payment
+    Then User receive the confirmation message
+
+  Scenario: Mobile Validation by using map
+    Given User launches flipkart application
+    And User handles login
+    When User search mobile by using OneD map
+      | A | samsung |
+      | B | redmi  |
+      | C | realme |
+    And User select the mobile and click add to cart
+    And User doing the payment
+    Then User receive the confirmation message
