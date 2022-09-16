@@ -1,4 +1,5 @@
 #Author: sakthi.email@your.domain.com
+@Mobile
 Feature: Mobile validation
 
   Background: 
@@ -6,23 +7,23 @@ Feature: Mobile validation
     And User handles login
 
   Scenario: Mobile Validation
-    When User search mobile
+    When User search mobile "realme"
     And User select the mobile and click add to cart
     And User doing the payment
     Then User receive the confirmation message
 
   Scenario: Mobile Validation by using list
     When User search mobile by using OneD list
-      | realme |  | APPLE iPhone |  | REDMI 9i |
+      | realme |  | iPhone |  | redmi |
     And User select the mobile and click add to cart
     And User doing the payment
     Then User receive the confirmation message
 
   Scenario: Mobile Validation by using map
     When User search mobile by using OneD map
-      | A | realme       |
-      | B | APPLE iPhone |
-      | C | REDMI 9i     |
+      | A | realme |
+      | B | iPhone |
+      | C | redmi  |
     And User select the mobile and click add to cart
     And User doing the payment
     Then User receive the confirmation message
@@ -34,7 +35,7 @@ Feature: Mobile validation
     Then User receive the confirmation message
 
     Examples: 
-      | Phone        |
-      | realme       |
-      | APPLE iPhone |
-      | REDMI 9i     |
+      | Phone  |
+      | realme |
+      | iPhone |
+      | REDMI  |

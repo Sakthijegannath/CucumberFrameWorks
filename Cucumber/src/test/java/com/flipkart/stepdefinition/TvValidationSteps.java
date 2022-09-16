@@ -16,29 +16,31 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import io.cucumber.datatable.DataTable;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-public class MobileValidationSteps {
+public class TvValidationSteps {
 	
 	static WebDriver driver;
- 	
-	@Given("User launches flipkart application")
-	public void user_launches_flipkart_application() {
 	
+	@Given("User launches flipkart application for Tv Purchase")
+	public void user_launches_flipkart_application_for_Tv_Purchase() {
+		
 		WebDriverManager.chromedriver().setup();
 		driver = new ChromeDriver();
 		driver.get("http://www.flipkart.com");
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(5,TimeUnit.SECONDS);
-		}
 
-	@Given("User handles login")
-	public void user_handles_login() {
+	}
 
+	@Given("User handles login for Tv purchase")
+	public void user_handles_login_for_Tv_purchase() {
+		
 		try {
 			WebElement closeicon = driver.findElement(By.xpath("//button[text()='✕']"));
 			closeicon.isDisplayed();
@@ -46,105 +48,103 @@ public class MobileValidationSteps {
 			}catch (Exception e) {
 		System.out.println("Login is not required");
 			}
-		}
-		
-    String name = "";
-    @When("User search mobile")
-    public void user_search_mobile() {
-    	
-		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-    	
-    	WebElement search = driver.findElement(By.name("q"));
-    	search.sendKeys(name,Keys.ENTER);
-    	}	
 
-    @When("User search mobile {string}")
-    public void user_search_mobile(String mobile) {
-    	
-		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-    	name = mobile;
-    	WebElement search = driver.findElement(By.name("q"));
-    	search.sendKeys(name,Keys.ENTER);
-	   	}
-
-	@When("User select the mobile and click add to cart")
-	public void user_select_the_mobile_and_click_add_to_cart() {
-		
-
-		WebElement selectmobile = driver.findElement(By.xpath("(//a//div//div//div[contains(text(),'"+name+"')])[2]"));
-		selectmobile.click();
-		Set<String> wH = driver.getWindowHandles();
-	 	List<String> listWindow = new ArrayList<String>(wH);
-	 	driver.switchTo().window(listWindow.get(1));
-		WebElement addtocart = driver.findElement(By.xpath("//*[@id=\"container\"]/div/div[3]/div[1]/div[1]/div[2]/div/ul/li[1]/button"));
-		addtocart.click();
 	}
 
-	@When("User doing the payment")
-	public void user_doing_the_payment() throws Exception  {
+    String name = "";
+	@When("User search Tv")
+	public void user_search_Tv() {
+    	
+		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+     	WebElement search = driver.findElement(By.name("q"));
+    	search.sendKeys(name+" Tv",Keys.ENTER);
+    	}
+	
+	@When("User search Tv {string}")
+	public void user_search_Tv(String Tv) {
+		
+	 	name = Tv;
+    	WebElement search = driver.findElement(By.name("q"));
+    	search.sendKeys(name+" Tv",Keys.ENTER);
+	   	}
+
+	@When("User select the Tv and click add to cart")
+	public void user_select_the_Tv_and_click_add_to_cart() throws Exception {
+		
+		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		WebElement selectTv = driver.findElement(By.xpath("(//a//div//div//div[contains(text(),'"+name+"')])[1]"));
+	 	selectTv.click();
+	 	Set<String> wH = driver.getWindowHandles();
+	 	List<String> listWindow = new ArrayList<String>(wH);
+	 	driver.switchTo().window(listWindow.get(1));
+		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+	 	WebElement addtocart = driver.findElement(By.xpath("//*[@id=\"container\"]/div/div[3]/div[1]/div[1]/div[2]/div/ul/li[1]/button"));
+		addtocart.click();
+		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+
+}
+
+	@When("User doing the Tv payment")
+	public void user_doing_the_Tv_payment() throws Exception {
 		
 		//Screenshot
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		
-		if(name.equalsIgnoreCase("realme"))
+		if(name.equalsIgnoreCase("SAMSUNG"))
 	 	{
 	  	TakesScreenshot ts =(TakesScreenshot)driver;
 	 	File src =ts.getScreenshotAs(OutputType.FILE);
-	 	File trg = new File("C:\\Users\\vrder\\eclipse-workspace\\screenshot\\realme.png");
+	 	File trg = new File("C:\\Users\\vrder\\eclipse-workspace\\screenshot\\Samsung-TV.png");
 	 	FileUtils.copyFile(src,trg);
 	 	}
-		if(name.equalsIgnoreCase("iphone"))
+		if(name.equalsIgnoreCase("SONY"))
 	 	{
 	  	TakesScreenshot ts =(TakesScreenshot)driver;
 	 	File src =ts.getScreenshotAs(OutputType.FILE);
-	 	File trg = new File("C:\\Users\\vrder\\eclipse-workspace\\screenshot\\iphone.png");
+	 	File trg = new File("C:\\Users\\vrder\\eclipse-workspace\\screenshot\\Sony-TV.png");
 	 	FileUtils.copyFile(src,trg);
 	 	}
-		if(name.equalsIgnoreCase("redmi"))
+		if(name.equalsIgnoreCase("LG"))
 	 	{
 	  	TakesScreenshot ts =(TakesScreenshot)driver;
 	 	File src =ts.getScreenshotAs(OutputType.FILE);
-	 	File trg = new File("C:\\Users\\vrder\\eclipse-workspace\\screenshot\\redmi.png");
+	 	File trg = new File("C:\\Users\\vrder\\eclipse-workspace\\screenshot\\LG-TV.png");
 	 	FileUtils.copyFile(src,trg);
 	 	}
-		
+
 	}
 
-	@Then("User receive the confirmation message")
-	public void user_receive_the_confirmation_message() {
+	@Then("User receive the Tv payment confirmation message")
+	public void user_receive_the_Tv_payment_confirmation_message() {
+		
 		//scrolldown
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		JavascriptExecutor j =(JavascriptExecutor)driver; 
-			
 		j.executeScript("window.scrollBy(0,1000)");
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		
 		driver.quit();
+
 	}
 	
-	@When("User search mobile by using OneD list")
-	public void user_search_mobile_by_using_D_list(DataTable dataTable) {
-
+	@When("User search Tv by using OneD list")
+	public void user_search_Tv_by_using_OneD_list(DataTable dataTable) {
+		
 		driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
 		List<String> datas = dataTable.asList();
-		name =datas.get(1);
-		
-		driver.findElement(By.name("q")).sendKeys(name, Keys.ENTER);	
+		name =datas.get(1);		
+		driver.findElement(By.name("q")).sendKeys(name+" TV", Keys.ENTER);	
 		driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
-
 	}
-	
 
-	@When("User search mobile by using OneD map")
-	public void user_search_mobile_by_using_D_map(DataTable dataTable) {
-
+	@When("User search Tv by using OneD map")
+	public void user_search_Tv_by_using_OneD_map(DataTable dataTable) {
+		
 		driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
 	    Map<String, String> datas = dataTable.asMap(String.class, String.class);
-	    char c = 'C';
-		name= datas.get(c);
-		driver.findElement(By.name("q")).sendKeys(name, Keys.ENTER);	
+	   	name= datas.get('C');
+		driver.findElement(By.name("q")).sendKeys(name+" TV", Keys.ENTER);	
 		driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
 	}
-
-		
+	
 }
